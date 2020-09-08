@@ -1,0 +1,43 @@
+PROCEDURE ortho(v1,v2 : ARRAY_OF INTEGER[50];n:INTEGER);
+VAR
+    j:INTEGER;
+BEGIN
+    FOR j FROM 0 TO n-1 STEP 2  DO
+        IF (v1[j]*v1[j+1]+v2[j]*v2[j+1]==0) THEN
+            write("vector number:",j,"and",j+1,"are ortho");
+        ELSE
+            write("vector number:",j,"and",j+1,"are not ortho");
+        END_IF
+    END_FOR
+END
+FUNCTION funcOrtho(v1i,v2i,v1j,v2j) : BOOLEAN;
+VAR
+    test:BOOLEAN;
+BEGIN
+    IF (v1i*v2i+v1j*v2j==0) THEN
+            test:=true;
+        ELSE
+            test:=false;
+    END_IF
+    RETURN test ;
+END
+ALGORITHM dot
+VAR
+    vecti,vectj : ARRAY_OF INTEGER[50];
+    i:INTEGER;
+BEGIN
+    read(n);
+    FOR i FROM 0 TO n-1 STEP 1  DO
+        read(vecti[i],vectj[i]);
+    END_FOR
+    //sol proc
+    ortho(vecti,vectj,n);
+    //sol func
+    FOR j FROM 0 TO n-1 STEP 2  DO
+        IF (funcOrtho(vecti[j],vecti[j+1],vectj[j],vectj[j+1])) THEN
+            write("vector number:",j,"and",j+1,"are ortho");
+        ELSE
+            write("vector number:",j,"and",j+1,"are not ortho");
+        END_IF
+    END_FOR
+END
